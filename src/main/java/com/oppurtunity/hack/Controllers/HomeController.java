@@ -26,6 +26,7 @@ public class HomeController {
 	@RequestMapping("/register")
 	public @ResponseBody
 	User register(@RequestBody User user) {
+
 		return userService.save(user); 
 	}
 	
