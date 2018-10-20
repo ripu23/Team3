@@ -1,4 +1,4 @@
-package clicktime.app.entities;
+package com.oppurtunity.hack.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

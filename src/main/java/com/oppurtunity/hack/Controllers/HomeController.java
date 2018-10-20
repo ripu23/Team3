@@ -1,5 +1,6 @@
-package clicktime.app.Controllers;
+package com.oppurtunity.hack.Controllers;
 
+import com.oppurtunity.hack.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import clicktime.app.entities.User;
-import clicktime.app.service.UserService;
+import com.oppurtunity.hack.service.UserService;
 
 @RestController
 public class HomeController {
@@ -24,7 +24,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/register")
-	public @ResponseBody User register(@RequestBody User user) {
+	public @ResponseBody
+	User register(@RequestBody User user) {
 		return userService.save(user); 
 	}
 	

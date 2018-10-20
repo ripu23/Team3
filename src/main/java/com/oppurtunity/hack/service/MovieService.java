@@ -1,13 +1,12 @@
-package clicktime.app.service;
+package com.oppurtunity.hack.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oppurtunity.hack.entities.Movie;
+import com.oppurtunity.hack.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import clicktime.app.entities.Movie;
-import clicktime.app.repositories.MovieRepository;
 
 @Service
 public class MovieService {

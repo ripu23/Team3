@@ -1,8 +1,8 @@
-package clicktime.app.repositories;
+package com.oppurtunity.hack.repositories;
 
 import org.springframework.stereotype.Repository;
 
-import clicktime.app.entities.User;
+import com.oppurtunity.hack.entities.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 

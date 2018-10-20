@@ -1,14 +1,14 @@
-package clicktime.app.Controllers;
+package com.oppurtunity.hack.Controllers;
 
 
 import java.util.List;
 
+import com.oppurtunity.hack.entities.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import clicktime.app.entities.Movie;
-import clicktime.app.service.MovieService;
+import com.oppurtunity.hack.service.MovieService;
 
 @RestController
 @RequestMapping("/movies")

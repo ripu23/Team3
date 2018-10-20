@@ -1,10 +1,9 @@
-package clicktime.app.service;
+package com.oppurtunity.hack.service;
 
+import com.oppurtunity.hack.entities.User;
+import com.oppurtunity.hack.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import clicktime.app.entities.User;
-import clicktime.app.repositories.UserRepository;
 
 @Service
 public class UserService {
