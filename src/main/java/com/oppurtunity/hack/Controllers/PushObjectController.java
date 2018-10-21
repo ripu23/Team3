@@ -34,7 +34,7 @@ public class PushObjectController {
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @RequestMapping("/get_all_objects")
+    @RequestMapping("/getAllObjects")
     public Set<String> getCollections() {
         DB database = mongoClient.getDB("progresstracking-objects");
         Set<String> colls = database.getCollectionNames();
