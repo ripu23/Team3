@@ -1,15 +1,17 @@
 var app = angular.module("mainApp");
 
-app.factory("EventService", function($http) {
+app.service("EventService", function($http) {
 
   this.getAllEvents = function getAllEvents() {
     return $http.get("/event/getAll", function(response) {
       return response.data;
     })
   }
-  this.getEventsForObject = function getEventsForObject(){
-    return $http.get("/event/getEventsForObject", function(response) {
-      return response.data;
+  this.getEventsForObject = function getEventsForObject(data){
+    return $http({
+      method: 'GET',
+      url: '/event/getEventsForObject',
+      params: {objectName: data}
     })
   }
   this.getEventDetails = function getEventDetails(data){
