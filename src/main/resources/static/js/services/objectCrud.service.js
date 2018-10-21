@@ -5,7 +5,7 @@ app.service("ModuleCrudService", function($http){
   this.saveModule = function saveModule(data){
     return $http({
       method : 'POST',
-      url : '/createObject/',
+      url : '/create_object/',
       data : {
     	  	moduleName: data.moduleName,
         attributes: data.attributes
