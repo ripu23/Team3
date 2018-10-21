@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/object")
@@ -36,7 +33,7 @@ public class PushObjectController {
     }
 
     @RequestMapping("/getObjectDetails")
-    public Set<String> getCollection(@RequestParam("moduleName") String moduleName) {
+    public HashMap<String, Set<String>> getCollection(@RequestParam("moduleName") String moduleName) {
         DB database = mongoClient.getDB("progresstracking-objects");
         DBCollection collection = database.getCollection(moduleName);
         Set<String> set = collection.findOne().keySet();
@@ -46,7 +43,9 @@ public class PushObjectController {
                 output.add(s);
             }
         }
-        return output;
+        HashMap<String, Set<String>> map = new HashMap<>();
+        map.put(moduleName, output);
+        return map;
     }
 
     @RequestMapping("/getAllObjects")

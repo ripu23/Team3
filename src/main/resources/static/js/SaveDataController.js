@@ -15,7 +15,7 @@ app.controller("SaveDataController",[
     console.log(data);
     ObjectService.getObjectDetails(data).then(function(response){
       console.log(response);
-      $scope.populateObj = response.data.attributes;
+      $scope.populateObj = response.data;
     }, function(err){
       if(err) throw err;
     })
