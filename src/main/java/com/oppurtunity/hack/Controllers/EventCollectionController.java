@@ -4,6 +4,8 @@ import com.mongodb.*;
 import com.oppurtunity.hack.entities.EventWrapper;
 import com.oppurtunity.hack.entities.Module;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,18 +19,22 @@ public class EventCollectionController {
 	@Autowired
 	private MongoClient mongoClient;
 
-	@RequestMapping(value="/createevent", consumes = "application/json")
-	public String createCollection(@RequestBody EventWrapper objects) {
-		System.out.println("event creation");
-		DB database = mongoClient.getDB("progresstracking-events");
-		DBCollection collection = database.createCollection(objects.getEventName(), null);
-		BasicDBObject document = new BasicDBObject();
-		document.put("object", "test");
-		for(Module mod : objects.getEventmodules()) {
-			document.put(mod.getLabel(), "test");
+	@RequestMapping(value="/createEvent", consumes = "application/json")
+	public ResponseEntity<Object> createCollection(@RequestBody EventWrapper objects) {
+		try {
+			System.out.println("event creation");
+			DB database = mongoClient.getDB("progresstracking-events");
+			DBCollection collection = database.createCollection(objects.getModuleName(), null);
+			BasicDBObject document = new BasicDBObject();
+			document.put("object", "test");
+			for(Module mod : objects.getAttributes()) {
+				document.put(mod.getLabel(), "test");
+			}
+			collection.insert(document);
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
-		collection.insert(document);
-		return "manoj";
 	}
 
 	@RequestMapping("/get_all_events")

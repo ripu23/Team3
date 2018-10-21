@@ -27,6 +27,7 @@ public class ObjectCollectionController {
 
     @RequestMapping(value="/create_object", consumes = "application/json")
     public ResponseEntity createCollection(@RequestBody ModuleWrapper objects) {
+        try{
         DB database = mongoClient.getDB("progresstracking-objects");
         DBCollection collection = database.createCollection(objects.getModuleName(), null);
         System.out.println(objects.getModuleName());
@@ -36,6 +37,9 @@ public class ObjectCollectionController {
         }
         collection.insert(document);
         return ResponseEntity.status(HttpStatus.OK).body(null);
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
     }
 
     @RequestMapping(value="/get_object", method=RequestMethod.GET)

@@ -3,9 +3,17 @@ package com.oppurtunity.hack.entities;
 import java.util.List;
 
 public class EventWrapper {
-	private String eventName;
+	private String moduleName;
 	private String objectName;
-	private List<Module> eventmodules;
+	private List<Module> attributes;
+
+	public String getModuleName() {
+		return moduleName;
+	}
+
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
+	}
 
 	public String getObjectName() {
 		return objectName;
@@ -15,18 +23,11 @@ public class EventWrapper {
 		this.objectName = objectName;
 	}
 
-	public String getEventName() {
-		return eventName;
+	public List<Module> getAttributes() {
+		return attributes;
 	}
-	public void setEventName(String eventName) {
-		this.eventName = eventName;
+
+	public void setAttributes(List<Module> attributes) {
+		this.attributes = attributes;
 	}
-	public List<Module> getEventmodules() {
-		return eventmodules;
-	}
-	public void setEventmodules(List<Module> eventmodules) {
-		this.eventmodules = eventmodules;
-	}
-	
-	
 }
