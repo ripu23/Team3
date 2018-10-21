@@ -1,16 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="card card-custom">
-      <div class="card-body">
-        <form>
-          <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-            <div class="col-sm-4">
-              <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-            </div>
-          </div>
-        </form>
+  <div class="card card-custom">
+    <div class="card-header">
+      <h4 class="text-muted">Add data</h4>
+    </div>
+    <div class="card-body">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Select Object</span>
+        </div>
+        <select class="select-custom" ng-change="populateForm(this)" ng-options="v for v in availableObjects">
+          <option value="">-- choose an option --</option>
+        </select>
       </div>
+      <form>
+        <div class="form-group row" ng-repeat="obj in populateObj">
+          <label>{{obj.label}}</label>
+          <input type="text" class="form-control" name="email" ng-model="user.email" required>
+          <p class="help-block" ng-show="userForm.email.$invalid">Valid Email Address Required</p>
+        </div>
+      </form>
     </div>
   </div>
+
 </div>

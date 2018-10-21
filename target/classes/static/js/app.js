@@ -16,8 +16,8 @@ homeApp.config(['$routeProvider', function($routeProvider){
 		controller : 'CreateModuleController'
 	})
   .when('/saveData',{
-		templateUrl: 'templates/saveData.html'
-		// controller : 'SaveDataController'
+		templateUrl: 'templates/saveData.html',
+		controller : 'SaveDataController'
 	})
 	.otherwise({
 		redirectTo: '/'
