@@ -5,8 +5,7 @@ app.controller("SaveEventController",[
   'availableObjects',
   'ObjectService',
   'EventService',
-  'Upload',
-  function($scope, availableObjects, ObjectService, EventService, Upload){
+  function($scope, availableObjects, ObjectService, EventService){
   console.log("Reached SaveEventController");
   $scope.availableObjects;
   if(availableObjects){
@@ -89,9 +88,21 @@ app.controller("SaveEventController",[
     })
 
   }
-  $scope.uploadCsv = function(data){
+  $scope.uploadCsv = function($file){
 
+    let data = {
+      eventName: $scope.eventSelected,
+      objectName: $scope.objectSelected,
+      file : $file
+    }
+    EventService.saveCsv(data);
+    // then(function(response){
+    //   alertify.success("successfully saved file");
+    // }, function(err){
+    //   alertify.error("Could not save file");
+    // })
   }
+
   function populateSavedObject(obj, data){
     _.forEach(Object.values(data), function(elem){
       obj.push({

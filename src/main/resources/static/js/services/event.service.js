@@ -1,6 +1,6 @@
 var app = angular.module("mainApp");
 
-app.service("EventService", function($http) {
+app.service("EventService", function($http, Upload) {
 
   this.getAllEvents = function getAllEvents() {
     return $http.get("/event/getAll", function(response) {
@@ -28,5 +28,16 @@ app.service("EventService", function($http) {
       url: '/event/createEvent',
       data: data
     })
+  }
+
+  this.saveCsv = function saveCsv(data){
+    Upload.upload({
+      url: '/event/saveFile',
+      file: data.file,
+      eventName: data.eventName,
+      objectName: data.objectName
+    }).progress(function(e) {}).then(function(data, status, headers, config) {
+      console.log(data);
+    });
   }
 })

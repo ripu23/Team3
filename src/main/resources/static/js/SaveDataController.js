@@ -48,11 +48,7 @@
             })
             console.log(data);
           }
-          $scope.uploadCsv = function(data) {
-
-          }
-
-          $scope.onFileSelect = function($files) {
+          $scope.uploadCsv = function($files) {
             Upload.upload({
               url: 'my/upload/url',
               file: $files,
@@ -60,6 +56,9 @@
               // file is uploaded successfully
               console.log(data);
             });
+          }
+
+
 
             function populateSavedObject(data) {
               _.forEach(Object.values(data), function(elem) {
@@ -70,5 +69,5 @@
               })
             }
           }
-}]);
+]);
     })();
