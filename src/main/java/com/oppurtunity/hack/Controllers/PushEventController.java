@@ -6,7 +6,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.oppurtunity.hack.entities.EventWrapper;
 import com.oppurtunity.hack.entities.Module;
-import com.oppurtunity.hack.entities.ModuleWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +27,7 @@ public class PushEventController {
         DB database = mongoClient.getDB("progresstracking-events");
         DBCollection collection = database.getCollection(objects.getEventName());
         BasicDBObject document = new BasicDBObject();
+        document.put("object", objects.getObjectName());
         for(Module mod : objects.getEventmodules()) {
             document.put(mod.getId(), mod.getLabel());
         }

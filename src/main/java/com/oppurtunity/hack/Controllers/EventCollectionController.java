@@ -23,6 +23,7 @@ public class EventCollectionController {
 		DB database = mongoClient.getDB("progresstracking-events");
 		DBCollection collection = database.createCollection(objects.getEventName(), null);
 		BasicDBObject document = new BasicDBObject();
+		document.put("object", "test");
 		for(Module mod : objects.getEventmodules()) {
 			document.put(mod.getLabel(), "test");
 		}
