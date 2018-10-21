@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class EventCollectionController {
@@ -32,7 +29,7 @@ public class EventCollectionController {
 			DB database = mongoClient.getDB("progresstracking-events");
 			DBCollection collection = database.createCollection(objects.getModuleName(), null);
 			BasicDBObject document = new BasicDBObject();
-			document.put("object", "test");
+			document.put("object", objects.getObjectName());
 			for(Module mod : objects.getAttributes()) {
 				document.put(mod.getLabel(), "test");
 			}
@@ -55,24 +52,17 @@ public class EventCollectionController {
 		return objects;
 	}
 
-	@RequestMapping(value="/get_event", method= RequestMethod.GET)
-	public Set<String> getCollection(@RequestParam("eventName") String eventName) {
-		DB database = mongoClient.getDB("progresstracking-events");
-		System.out.println(eventName);
-		DBCollection collection = database.getCollection(eventName);
-		Set<String> set = collection.findOne().keySet();
-		Set<String> output = new HashSet<>();
-		for(String s: set) {
-			if(!s.equals("_id")) {
-				output.add(s);
-			}
-		}
-		return output;
-	}
 
 	@RequestMapping(value = "/get_event_attributes/{eventName}", method = RequestMethod.POST)
 	public String uploadFile(@RequestPart(value = "file") MultipartFile multiPartFile, @PathVariable("eventName") String eventName) throws IOException {
 		eventService.uploadFile(multiPartFile,eventName);
 		return "Success";
 	}
+
+    @RequestMapping("/delete_events")
+    public void deleteCollections() {
+        DB database = mongoClient.getDB("progresstracking-events");
+        database.dropDatabase();
+    }
+
 }

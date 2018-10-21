@@ -60,8 +60,7 @@ public class ObjectCollectionController {
     @RequestMapping("/delete_objects")
     public void deleteCollections() {
         DB database = mongoClient.getDB("progresstracking-objects");
-        DBCollection collection = database.getCollection("collections");
-        collection.drop();
+        database.dropDatabase();
     }
 
 }
