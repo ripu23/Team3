@@ -46,9 +46,22 @@
       </div>
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-info pull-right" ng-click="save()">Save</button>
-      <button type="button" class="btn btn-info pull-warning" ng-click="uploadCsv()"><input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" /></button>
+      <button type="button" class="btn btn-info pull-right" ng-click="save(eventSelected, objectSelected)">Save</button>
+      <input type="file" onchange="uploadCsv(this)" />
     </div>
   </div>
+  <script>
+    function uploadCsv(e, eventSelected, objectSelected) {
+
+      let file = e.files[0];
+      let formData = new FormData();
+      formData.append("files", file);
+      formData.append("objectName", objectSelected);
+      formData.append("eventName", eventSelected);
+      let xhr = new XMLHttpRequest();
+      xhr.open("POST", '/event/saveFile');
+      xhr.send(formData);
+    }
+  </script>
 
 </div>

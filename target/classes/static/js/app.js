@@ -33,6 +33,10 @@ homeApp.config(['$routeProvider', function($routeProvider){
     },
 		controller : 'SaveEventController'
 	})
+  .when('/plot',{
+		templateUrl: 'templates/plot.html',
+		controller : 'PlotController'
+	})
 	.otherwise({
 		redirectTo: '/'
 	})

@@ -5,7 +5,8 @@ app.controller("SaveEventController",[
   'availableObjects',
   'ObjectService',
   'EventService',
-  function($scope, availableObjects, ObjectService, EventService){
+  'Upload',
+  function($scope, availableObjects, ObjectService, EventService, Upload){
   console.log("Reached SaveEventController");
   $scope.availableObjects;
   if(availableObjects){
@@ -88,19 +89,15 @@ app.controller("SaveEventController",[
     })
 
   }
-  $scope.uploadCsv = function($file){
+  function uploadCsv (e){
 
-    let data = {
-      eventName: $scope.eventSelected,
-      objectName: $scope.objectSelected,
-      file : $file
-    }
-    EventService.saveCsv(data);
-    // then(function(response){
-    //   alertify.success("successfully saved file");
-    // }, function(err){
-    //   alertify.error("Could not save file");
-    // })
+    let file = e.files[0];
+    let formData = new FormData();
+    formData.append("objectName", $scope.objectSelected);
+    formData.append("eventName", $scope.eventSelected);
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", '/event/saveFile');
+    xhr.send(formData);
   }
 
   function populateSavedObject(obj, data){

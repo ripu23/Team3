@@ -36,7 +36,7 @@ public class PushEventController {
 
         //event mapping
         BasicDBObject document1 = new BasicDBObject();
-        document1.put("object", objects.getObject().getModuleName());ss
+        document1.put("object", objects.getObject().getModuleName());
         for(ObjectDataModule mod : objects.getEvents().getAttributes()) {
             document1.put(mod.getLabel(), mod.getValue());
         }
