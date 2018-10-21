@@ -41,7 +41,7 @@ public class PushEventController {
     }
 
     @RequestMapping(value="/getEventDetails", method= RequestMethod.GET)
-    public Set<String> getCollection(@RequestParam("eventName") String eventName) {
+    public Set<String> getCollection(@RequestParam("moduleName") String eventName) {
         DB database = mongoClient.getDB("progresstracking-events");
         System.out.println(eventName);
         DBCollection collection = database.getCollection(eventName);
