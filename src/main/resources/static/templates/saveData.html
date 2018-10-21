@@ -9,7 +9,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Select Object</span>
         </div>
-        <select class="select-custom" ng-model="selected" ng-change="populateForm()" ng-options="v for v in availableObjects">
+        <select class="select-custom" ng-model="selected" ng-change="populateForm(selected)" ng-options="v for v in availableObjects">
           <option value="">-- choose an option --</option>
         </select>
       </div>

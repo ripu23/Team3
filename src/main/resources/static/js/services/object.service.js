@@ -11,7 +11,7 @@ app.service("ObjectService", function($http){
       return $http({
         method: 'GET',
         url: '/object/getObjectDetails',
-        params: {moduleName: data.moduleName}
+        params: {moduleName: data}
       })
     }
 
