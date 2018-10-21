@@ -71,7 +71,7 @@ app.controller("SaveEventController",[
         }
       })
   }
-  $scope.save = function (data) {
+  $scope.save = function () {
     let data = {
       object: {
         moduleName: $scope.objectSelected,
@@ -82,7 +82,7 @@ app.controller("SaveEventController",[
         attributes: $scope.toBeSavedEvent.attributes
       }
     }
-    EventService.createEvent.then(function(response){
+    EventService.createEvent(data).then(function(response){
       alertify.success("successfuly saved");
     }, function(err){
       alertify.error("Somethings is wrong with api.")

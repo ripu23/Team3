@@ -4,7 +4,7 @@
         '$scope',
         'availableObjects',
         'ObjectService',
-        'Upload'
+        'Upload',
         function($scope, availableObjects, ObjectService, Upload) {
           console.log("Reached SaveDataController");
           $scope.availableObjects;
@@ -69,5 +69,6 @@
                 })
               })
             }
-          }]);
+          }
+}]);
     })();
