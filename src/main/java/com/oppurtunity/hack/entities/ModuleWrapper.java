@@ -3,22 +3,22 @@ import java.util.*;
 
 public class ModuleWrapper {
 
-    private String name;
-    private List<Module> modules;
+    private String moduleName;
+    private List<Module> attributes;
 
-    public String getName() {
-        return name;
+    public String getModuleName() {
+        return moduleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
     }
 
-    public List<Module> getModules() {
-        return modules;
+    public List<Module> getAttributes() {
+        return attributes;
     }
 
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
+    public void setAttributes(List<Module> attributes) {
+        this.attributes = attributes;
     }
 }

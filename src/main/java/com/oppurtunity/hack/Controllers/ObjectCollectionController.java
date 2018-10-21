@@ -15,46 +15,36 @@ public class ObjectCollectionController {
 
     @RequestMapping(value="/create_object", consumes = "application/json")
     public String createCollection(@RequestBody ModuleWrapper objects) {
-        DB database = mongoClient.getDB("progresstracking");
-        DBCollection collection = database.getCollection("collections");
+        DB database = mongoClient.getDB("progresstracking-objects");
+        DBCollection collection = database.createCollection(objects.getName(), null);
         BasicDBObject document = new BasicDBObject();
-        document.put("name", objects.getName());
         for(Module mod : objects.getModules()) {
-            document.put(mod.getId(), mod.getLabel());
+            document.put(mod.getLabel(), "test");
         }
         collection.insert(document);
         return "manoj";
     }
 
-    @RequestMapping("/get_all_objects")
-    public List<DBObject> getCollections() {
-        DB database = mongoClient.getDB("progresstracking");
-        DBCollection collection = database.getCollection("collections");
-        DBCursor cursor = collection.find();
-        List<DBObject> objects = new ArrayList<>();
-        while(cursor.hasNext()) {
-            objects.add(cursor.next());
-        }
-        return objects;
-    }
+
 
     @RequestMapping(value="/get_object", method=RequestMethod.GET)
-    public DBObject getCollection(@RequestParam("collectionName") String collectionName) {
-        DB database = mongoClient.getDB("progresstracking");
-        DBCollection collection = database.getCollection("collections");
-        BasicDBObject whereQuery = new BasicDBObject();
-        whereQuery.put("name", collectionName);
-        DBCursor cursor = collection.find(whereQuery);
-        List<DBObject> objects = new ArrayList<>();
-        while(cursor.hasNext()) {
-            objects.add(cursor.next());
+    public Set<String> getCollection(@RequestParam("collectionName") String collectionName) {
+        DB database = mongoClient.getDB("progresstracking-objects");
+        System.out.println(collectionName);
+        DBCollection collection = database.getCollection(collectionName);
+        Set<String> set = collection.findOne().keySet();
+        Set<String> output = new HashSet<>();
+        for(String s: set) {
+            if(!s.equals("_id")) {
+                output.add(s);
+            }
         }
-        return objects.get(0);
+        return output;
     }
 
     @RequestMapping("/delete_objects")
     public void deleteCollections() {
-        DB database = mongoClient.getDB("progresstracking");
+        DB database = mongoClient.getDB("progresstracking-objects");
         DBCollection collection = database.getCollection("collections");
         collection.drop();
     }
