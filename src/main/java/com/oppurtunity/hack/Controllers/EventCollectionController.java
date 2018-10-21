@@ -17,7 +17,7 @@ public class EventCollectionController {
 	@Autowired
 	private MongoClient mongoClient;
 
-	@RequestMapping(value="/create_events", consumes = "application/json")
+	@RequestMapping(value="/createevent", consumes = "application/json")
 	public String createCollection(@RequestBody EventWrapper objects) {
 		System.out.println("event creation");
 		DB database = mongoClient.getDB("progresstracking-events");
@@ -43,7 +43,7 @@ public class EventCollectionController {
 		return objects;
 	}
 
-	@RequestMapping(value="/get_object", method= RequestMethod.GET)
+	@RequestMapping(value="/get_event", method= RequestMethod.GET)
 	public Set<String> getCollection(@RequestParam("eventName") String eventName) {
 		DB database = mongoClient.getDB("progresstracking-events");
 		System.out.println(eventName);

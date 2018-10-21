@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,16 +26,16 @@ public class ObjectCollectionController {
     private MongoClient mongoClient;
 
     @RequestMapping(value="/create_object", consumes = "application/json")
-    public String createCollection(@RequestBody ModuleWrapper objects) {
+    public ResponseEntity createCollection(@RequestBody ModuleWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-objects");
         DBCollection collection = database.createCollection(objects.getModuleName(), null);
+        System.out.println(objects.getModuleName());
         BasicDBObject document = new BasicDBObject();
-        document.put("name", objects.getModuleName());
         for(Module mod : objects.getAttributes()) {
             document.put(mod.getLabel(), "test");
         }
         collection.insert(document);
-        return "manoj";
+        return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
     @RequestMapping(value="/get_object", method=RequestMethod.GET)
