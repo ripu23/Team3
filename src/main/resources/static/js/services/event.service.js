@@ -29,6 +29,12 @@ app.service("EventService", function($http, Upload) {
       data: data
     })
   }
+  this.getDonations = function getDonations(){
+    return $http({
+      method: 'GET',
+      url: '10.2.20.93:8080/plot/getDonations'
+    })
+  }
 
   this.saveCsv = function saveCsv(data){
     Upload.upload({
