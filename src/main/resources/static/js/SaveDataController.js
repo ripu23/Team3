@@ -13,13 +13,19 @@ app.controller("SaveDataController",[
   $scope.populateObj;
   $scope.populateForm = function(data){
     ObjectService.getObjectDetails(data).then(function(response){
-      $scope.populateObj = response.data.attributes;
+      $scope.populateObj = response.data;
     }, function(err){
       if(err) throw err;
       alertify.error("Population failed");
     })
   }
 
+  $scope.save = function (data) {
+    console.log(data);
+  }
+  $scope.uploadCsv = function(data){
+
+  }
 }]);
 
 })();
