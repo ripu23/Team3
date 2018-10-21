@@ -1,14 +1,22 @@
 <div class="container">
   <div class="card card-custom">
     <div class="card-header">
-      <h4 class="text-muted">Add data</h4>
+      <h4 class="text-muted">Add Events</h4>
     </div>
     <div class="card-body">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text">Select Object</span>
         </div>
-        <select class="select-custom" ng-model="selected" ng-change="populateForm(selected)" ng-options="v for v in availableObjects">
+        <select class="select-custom" ng-model="objectSelected" ng-change="populateEventsForForm(objectSelected)" ng-options="v for v in availableObjects">
+          <option value="">-- choose an option --</option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Select Event</span>
+        </div>
+        <select class="select-custom" ng-model="eventSelected" ng-change="populateFormData(eventSelected)" ng-options="v for v in eventsForObject">
           <option value="">-- choose an option --</option>
         </select>
       </div>
@@ -16,7 +24,7 @@
         <div class="form-group row" ng-repeat="obj in populateObj">
           <label class="col-sm-2 col-form-label">{{obj}}</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" ng-model="user.email">
+            <input type="text" class="form-control" name="email" ng-model="user.email">
           </div>
         </div>
       </form>

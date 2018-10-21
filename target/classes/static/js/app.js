@@ -24,6 +24,15 @@ homeApp.config(['$routeProvider', function($routeProvider){
     },
 		controller : 'SaveDataController'
 	})
+  .when('/saveData',{
+		templateUrl: 'templates/saveEvent.html',
+    resolve: {
+      availableObjects : ['ObjectService', function(ObjectService){
+        return ObjectService.getAllObjects();
+      }]
+    },
+		controller : 'SaveEventController'
+	})
 	.otherwise({
 		redirectTo: '/'
 	})
