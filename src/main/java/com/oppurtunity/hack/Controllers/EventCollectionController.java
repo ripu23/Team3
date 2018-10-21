@@ -34,6 +34,7 @@ public class EventCollectionController {
 				document.put(mod.getLabel(), "test");
 			}
 			collection.insert(document);
+
 			return ResponseEntity.status(HttpStatus.OK).body(null);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

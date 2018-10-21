@@ -3,6 +3,8 @@ package com.oppurtunity.hack.Controllers;
 import com.mongodb.*;
 import com.oppurtunity.hack.entities.Module;
 import com.oppurtunity.hack.entities.ModuleWrapper;
+import com.oppurtunity.hack.entities.ObjectDataModule;
+import com.oppurtunity.hack.entities.ObjectDataWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,13 @@ public class PushObjectController {
     private MongoClient mongoClient;
 
     @RequestMapping(value="createObject", consumes = "application/json")
-    public ResponseEntity createCollection(@RequestBody ModuleWrapper objects) {
+
+    public ResponseEntity createCollection(@RequestBody ObjectDataWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-objects");
         DBCollection collection = database.getCollection(objects.getModuleName());
         BasicDBObject document = new BasicDBObject();
-        for(Module mod : objects.getAttributes()) {
-            document.put(mod.getId(), mod.getLabel());
+        for(ObjectDataModule mod : objects.getAttributes()) {
+            document.put(mod.getLabel(), mod.getValue());
         }
         collection.insert(document);
         return ResponseEntity.status(HttpStatus.OK).body(null);
