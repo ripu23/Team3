@@ -24,7 +24,7 @@ homeApp.config(['$routeProvider', function($routeProvider){
     },
 		controller : 'SaveDataController'
 	})
-  .when('/saveData',{
+  .when('/saveEvent',{
 		templateUrl: 'templates/saveEvent.html',
     resolve: {
       availableObjects : ['ObjectService', function(ObjectService){
