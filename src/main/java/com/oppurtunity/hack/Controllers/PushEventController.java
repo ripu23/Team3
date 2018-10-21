@@ -35,7 +35,7 @@ public class PushEventController {
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @RequestMapping("/get_all_events")
+    @RequestMapping("/getAllEvents")
     public Set<String> getCollections() {
         DB database = mongoClient.getDB("progresstracking-events");
         Set<String> colls = database.getCollectionNames();
