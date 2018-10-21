@@ -1,10 +1,8 @@
 package com.oppurtunity.hack.service;
-import com.oppurtunity.hack.entities.User;
-import com.oppurtunity.hack.repositories.DonationRepository;
 
+import com.oppurtunity.hack.repositories.DonationRepository;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.oppurtunity.hack.entities.Donation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
