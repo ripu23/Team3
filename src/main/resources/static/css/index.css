@@ -1,0 +1,27 @@
+body {
+  background-color: black;
+}
+
+.navbar-heading {
+  color: #006bde;
+  font-family: Helvetica;
+}
+
+.navbar-custom {
+  background-color: white;
+}
+
+.card-custom {
+  margin: 0 auto;
+  width: 100%;
+  margin: 2rem;
+}
+
+.button-left{
+  margin-left: -12px;
+}
+
+.selected-font{
+  color: red;
+  font-family: Helvetica;
+}
