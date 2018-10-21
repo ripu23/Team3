@@ -30,24 +30,34 @@ public class PushEventController {
 
     @RequestMapping(value="/createEvent", consumes = "application/json")
     public ResponseEntity createCollection(@RequestBody DataWrapper objects) {
-        DB database = mongoClient.getDB("progresstracking-events");
-        DBCollection eventCollection = database.getCollection(objects.getEvents().getModuleName());
-        DBCollection objectCollection = database.getCollection(objects.getObject().getModuleName());
+        DB database1 = mongoClient.getDB("progresstracking-events");
+        DB database2 = mongoClient.getDB("progresstracking-objects");
+        DBCollection eventCollection = database1.getCollection(objects.getEvents().getModuleName());
+        DBCollection objectCollection = database2.getCollection(objects.getObject().getModuleName());
+
+        String key = "";
+        // object mapping
+        BasicDBObject document2 = new BasicDBObject();
+        for(ObjectDataModule mod : objects.getObject().getAttributes()) {
+            if(mod.getLabel().equals("Name")) {
+                key =  mod.getValue();
+            }
+            document2.put(mod.getLabel(), mod.getValue());
+
+        }
+        objectCollection.insert(document2);
 
         //event mapping
         BasicDBObject document1 = new BasicDBObject();
         document1.put("object", objects.getObject().getModuleName());
+        document1.put("idName", key );
+        System.out.println(objects.getEvents().getAttributes().size());
         for(ObjectDataModule mod : objects.getEvents().getAttributes()) {
             document1.put(mod.getLabel(), mod.getValue());
         }
         eventCollection.insert(document1);
 
-        // object mapping
-        BasicDBObject document2 = new BasicDBObject();
-        for(ObjectDataModule mod : objects.getObject().getAttributes()) {
-            document2.put(mod.getLabel(), mod.getValue());
-        }
-        objectCollection.insert(document2);
+
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
