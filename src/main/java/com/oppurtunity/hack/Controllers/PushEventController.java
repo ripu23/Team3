@@ -5,11 +5,14 @@ import com.oppurtunity.hack.entities.DataWrapper;
 import com.oppurtunity.hack.entities.EventWrapper;
 import com.oppurtunity.hack.entities.Module;
 import com.oppurtunity.hack.entities.ObjectDataModule;
+import com.oppurtunity.hack.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,23 +25,26 @@ public class PushEventController {
     @Autowired
     private MongoClient mongoClient;
 
+    @Autowired
+    private EventService eventService;
+
     @RequestMapping(value="/createEvent", consumes = "application/json")
     public ResponseEntity createCollection(@RequestBody DataWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-events");
-        DBCollection eventCollection = database.getCollection(objects.getEventDataWrapper().getModuleName());
-        DBCollection objectCollection = database.getCollection(objects.getObjectDataWrapper().getModuleName());
+        DBCollection eventCollection = database.getCollection(objects.getEvents().getModuleName());
+        DBCollection objectCollection = database.getCollection(objects.getObject().getModuleName());
 
         //event mapping
         BasicDBObject document1 = new BasicDBObject();
-        document1.put("object", objects.getObjectDataWrapper().getModuleName());
-        for(ObjectDataModule mod : objects.getEventDataWrapper().getAttributes()) {
+        document1.put("object", objects.getObject().getModuleName());ss
+        for(ObjectDataModule mod : objects.getEvents().getAttributes()) {
             document1.put(mod.getLabel(), mod.getValue());
         }
         eventCollection.insert(document1);
 
         // object mapping
         BasicDBObject document2 = new BasicDBObject();
-        for(ObjectDataModule mod : objects.getObjectDataWrapper().getAttributes()) {
+        for(ObjectDataModule mod : objects.getObject().getAttributes()) {
             document2.put(mod.getLabel(), mod.getValue());
         }
         objectCollection.insert(document2);
@@ -84,5 +90,11 @@ public class PushEventController {
         }
         map.put(objectName, output);
         return map;
+    }
+
+    @RequestMapping(value = "/saveFile", method = RequestMethod.POST)
+    public String uploadFile(@RequestPart(value = "file") MultipartFile multiPartFile, @PathVariable("eventName") String eventName,  @PathVariable("eventName") String objectName) throws IOException {
+        eventService.uploadFile(multiPartFile,eventName, objectName);
+        return "Success";
     }
 }

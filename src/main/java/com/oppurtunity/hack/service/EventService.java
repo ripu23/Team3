@@ -41,12 +41,14 @@ public class EventService {
         return eventAttributes;
     }
 
-    public void uploadFile(MultipartFile multipartFile,String eventName) throws IOException {
+    public void uploadFile(MultipartFile multipartFile,String eventName, String objectName) throws IOException {
         Set<String> eventAttributes = findEventAttributes(eventName);
         int inputNumofColumns=eventAttributes.size();
         File file = convertMultiPartToFile(multipartFile);
-        DB database = mongoClient.getDB("progresstracking-events");
-        DBCollection collection = database.getCollection(eventName);
+        DB database1 = mongoClient.getDB("progresstracking-events");
+        DBCollection collection1 = database1.getCollection(eventName);
+        DB database2 = mongoClient.getDB("progresstracking-objects");
+        DBCollection collection2= database2.getCollection(objectName);
         String line = "";
         String[] columns =null;
         String cvsSplitBy = ",";
@@ -65,7 +67,7 @@ public class EventService {
                     for (int i = 0; i < eventData.length; i++) {
                         doc.put(columns[i],eventData[i]);
                     }
-                    collection.insert(doc);
+                    collection1.insert(doc);
                 }
             }
         } catch (IOException e) {
