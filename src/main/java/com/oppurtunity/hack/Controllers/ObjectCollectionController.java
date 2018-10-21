@@ -16,16 +16,14 @@ public class ObjectCollectionController {
     @RequestMapping(value="/create_object", consumes = "application/json")
     public String createCollection(@RequestBody ModuleWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-objects");
-        DBCollection collection = database.createCollection(objects.getName(), null);
+        DBCollection collection = database.createCollection(objects.getModuleName(), null);
         BasicDBObject document = new BasicDBObject();
-        for(Module mod : objects.getModules()) {
+        for(Module mod : objects.getAttributes()) {
             document.put(mod.getLabel(), "test");
         }
         collection.insert(document);
         return "manoj";
     }
-
-
 
     @RequestMapping(value="/get_object", method=RequestMethod.GET)
     public Set<String> getCollection(@RequestParam("collectionName") String collectionName) {
