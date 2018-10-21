@@ -32,12 +32,12 @@
         newObj = Object.create(dummy);
         newObj.id = CreateId.create();
         newObj.label = "Label";
-        $scope.moduleObject.push(newObj);
+        $scope.moduleObject.attributes.push(newObj);
       }
 
       $scope.removeAttributes = function() {
         if ($scope.moduleObject.length > 1) {
-          $scope.moduleObject.pop();
+          $scope.moduleObject.attributes.pop();
         }
       }
 
