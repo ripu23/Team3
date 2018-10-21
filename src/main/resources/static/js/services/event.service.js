@@ -21,4 +21,12 @@ app.service("EventService", function($http) {
       params: {moduleName: data}
     })
   }
+
+  this.createEvent = function createEvent(data){
+    return $http({
+      method: 'POST',
+      url: '/event/createEvent',
+      data: data
+    })
+  }
 })

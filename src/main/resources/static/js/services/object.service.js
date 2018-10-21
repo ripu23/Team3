@@ -15,4 +15,12 @@ app.service("ObjectService", function($http){
       })
     }
 
+    this.createObject = function createObject(data){
+      return $http({
+        method: 'POST',
+        url: '/object/createObject',
+        data: data
+      })
+    }
+
 });
