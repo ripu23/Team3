@@ -54,11 +54,6 @@ public class EventCollectionController {
 	}
 
 
-	@RequestMapping(value = "/get_event_attributes/{eventName}", method = RequestMethod.POST)
-	public String uploadFile(@RequestPart(value = "file") MultipartFile multiPartFile, @PathVariable("eventName") String eventName) throws IOException {
-		eventService.uploadFile(multiPartFile,eventName);
-		return "Success";
-	}
 
     @RequestMapping("/delete_events")
     public void deleteCollections() {

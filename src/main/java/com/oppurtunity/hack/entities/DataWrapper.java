@@ -2,23 +2,23 @@ package com.oppurtunity.hack.entities;
 
 public class DataWrapper {
 
-    private ObjectDataWrapper objectDataWrapper;
+    private ObjectDataWrapper object;
 
-    private EventDataWrapper eventDataWrapper;
+    private EventDataWrapper events;
 
-    public ObjectDataWrapper getObjectDataWrapper() {
-        return objectDataWrapper;
+    public ObjectDataWrapper getObject() {
+        return object;
     }
 
-    public void setObjectDataWrapper(ObjectDataWrapper objectDataWrapper) {
-        this.objectDataWrapper = objectDataWrapper;
+    public void setObject(ObjectDataWrapper object) {
+        this.object = object;
     }
 
-    public EventDataWrapper getEventDataWrapper() {
-        return eventDataWrapper;
+    public EventDataWrapper getEvents() {
+        return events;
     }
 
-    public void setEventDataWrapper(EventDataWrapper eventDataWrapper) {
-        this.eventDataWrapper = eventDataWrapper;
+    public void setEvents(EventDataWrapper events) {
+        this.events = events;
     }
 }
