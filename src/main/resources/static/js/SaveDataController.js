@@ -1,4 +1,4 @@
-function(){
+(function(){
 var app = angular.module("mainApp")
 app.controller("SaveDataController",[
   '$scope',
@@ -27,5 +27,4 @@ app.controller("SaveDataController",[
 
   }
 }]);
-
 })();

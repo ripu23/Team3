@@ -5,8 +5,6 @@ public class ModuleWrapper {
 
     private String moduleName;
     private List<Module> attributes;
-
-
     public String getModuleName() {
         return moduleName;
     }

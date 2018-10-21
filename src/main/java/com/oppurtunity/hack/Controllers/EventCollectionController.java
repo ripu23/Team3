@@ -3,11 +3,14 @@ package com.oppurtunity.hack.Controllers;
 import com.mongodb.*;
 import com.oppurtunity.hack.entities.EventWrapper;
 import com.oppurtunity.hack.entities.Module;
+import com.oppurtunity.hack.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +21,9 @@ public class EventCollectionController {
 
 	@Autowired
 	private MongoClient mongoClient;
+
+	@Autowired
+	private EventService eventService;
 
 	@RequestMapping(value="/createEvent", consumes = "application/json")
 	public ResponseEntity<Object> createCollection(@RequestBody EventWrapper objects) {
@@ -62,5 +68,11 @@ public class EventCollectionController {
 			}
 		}
 		return output;
+	}
+
+	@RequestMapping(value = "/get_event_attributes/{eventName}", method = RequestMethod.POST)
+	public String uploadFile(@RequestPart(value = "file") MultipartFile multiPartFile, @PathVariable("eventName") String eventName) throws IOException {
+		eventService.uploadFile(multiPartFile,eventName);
+		return "Success";
 	}
 }
