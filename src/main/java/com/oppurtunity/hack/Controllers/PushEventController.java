@@ -22,7 +22,7 @@ public class PushEventController {
     @Autowired
     private MongoClient mongoClient;
 
-    @RequestMapping(value="createEvent", consumes = "application/json")
+    @RequestMapping(value="/createEvent", consumes = "application/json")
     public ResponseEntity createCollection(@RequestBody DataWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-events");
         DBCollection eventCollection = database.getCollection(objects.getEventDataWrapper().getModuleName());
