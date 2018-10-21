@@ -1,14 +1,13 @@
-'use strict'
 var app = angular.module("mainApp");
 
-app.service("ModuleCrudService", function($http){
+app.service("EventCrudService", function($http){
   this.saveModule = function saveModule(data){
     return $http({
       method : 'POST',
-      url : '/createModule/',
+      url : '/createEvent/',
       data : {
-        name: data.name,
-        data: data.data
+    	  	moduleName: data.moduleName,
+        attributes: data.attributes
       }
     })
   }

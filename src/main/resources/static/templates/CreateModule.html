@@ -2,27 +2,35 @@
   <div class="row">
 
     <div class="card card-custom">
+      <div class="card-header">
+
+        <h3 class="text-muted">Please create a module</h3>
+      </div>
       <div class="card-body">
-        <div class="dropdown">
-
-          <select ng-model="moduleType.value" ng-options="v for v in moduleType.values">
-            <option value="">-- choose an option --</option>
-          </select>
-
-        </div>
-        <br />
         <form>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text">Type Selected</span>
+              <span class="input-group-text">Module Type</span>
             </div>
             <div class="col-xs-3">
-              <input type="text" class="form-control" readonly value="{{moduleType.value}}">
+              <select class="select-custom" ng-model="moduleType.value" ng-options="v for v in moduleType.values">
+                <option value="">-- choose an option --</option>
+              </select>
+            </div>
+          </div>
+          <div class="input-group mb-3" ng-if="moduleType.value=='Event'">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Select Object</span>
+            </div>
+            <div class="col-xs-3">
+              <select class="select-custom" ng-model="moduleObject.objectName" ng-options="v.moduleName for v in availableObjects">
+                <option value="">-- choose an option --</option>
+              </select>
             </div>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" id="">Module Name:</span>
+              <span class="input-group-text" id="">Module Name</span>
             </div>
             <div class="col-xs-3">
               <input type="text" class="form-control" ng-model="moduleObject.moduleName">

@@ -25,3 +25,7 @@ body {
   color: red;
   font-family: Helvetica;
 }
+.select-custom{
+  height: 38px;
+  width: 200px;
+}

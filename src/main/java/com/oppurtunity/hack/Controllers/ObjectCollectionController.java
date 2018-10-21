@@ -18,8 +18,8 @@ public class ObjectCollectionController {
         DB database = mongoClient.getDB("progresstracking");
         DBCollection collection = database.getCollection("collections");
         BasicDBObject document = new BasicDBObject();
-        document.put("name", objects.getName());
-        for(Module mod : objects.getModules()) {
+        document.put("name", objects.getModuleName());
+        for(Module mod : objects.getAttributes()) {
             document.put(mod.getId(), mod.getLabel());
         }
         collection.insert(document);

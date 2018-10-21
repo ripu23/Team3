@@ -8,7 +8,16 @@ homeApp.config(['$routeProvider', function($routeProvider){
 	$routeProvider
 	.when('/',{
 		templateUrl: 'templates/CreateModule.html',
+    resolve: {
+      availableObjects : ['ObjectService', function(ObjectService){
+        // return ObjectService.getAllObjects();
+      }]
+    },
 		controller : 'CreateModuleController'
+	})
+  .when('/saveData',{
+		templateUrl: 'templates/saveData.html'
+		// controller : 'SaveDataController'
 	})
 	.otherwise({
 		redirectTo: '/'

@@ -6,7 +6,7 @@ app.factory("movieService", function($http){
         getAllMovies: function() {
             return $http.get("/movies/getAll").then(function(response) {
                 return response.data;
-            });
+            });``
         }
     }
 })

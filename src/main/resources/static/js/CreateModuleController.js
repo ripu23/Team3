@@ -5,11 +5,18 @@
     '$scope',
     'CreateId',
     'ModuleCrudService',
-    function($scope, CreateId, ModuleCrudService) {
+    'EventCrudService',
+    'ObjectService',
+    'availableObjects',
+    function($scope, CreateId, ModuleCrudService, EventCrudService, ObjectService, availableObjects) {
       console.log('%c Reached Module Controller', 'color:green');
       $(function() {
         $('[data-toggle="tooltip"]').tooltip()
       })
+      $scope.availableObjects = [];
+      if (availableObjects) {
+        $scope.availableObjects = availableObjects;
+      }
       $scope.moduleObject = {};
       $scope.moduleObject.attributes = [];
       const dummy = {
@@ -40,15 +47,23 @@
           $scope.moduleObject.attributes.pop();
         }
       }
-
+      
       $scope.saveModule = function() {
-        ModuleCrudService.saveModule({
-          data : $scope.moduleObject
-        }).then(function success(response){
-          alertify.success('Successfuly created');
-        }, function error(err){
-          alertify.error('Something is wrong with the API');
-        })
+
+        if ($scope.moduleType.value == 'Object') {
+          ModuleCrudService.saveModule($scope.moduleObject).then(function success(response) {
+            alertify.success('Successfuly created');
+          }, function error(err) {
+            alertify.error('Something is wrong with the API');
+          })
+        } else {
+          EventCrudService.saveModule($scope.moduleObject).then(function success(response) {
+            alertify.success('Successfuly created');
+          }, function error(err) {
+            alertify.error('Something is wrong with the API');
+          })
+        }
+
       }
 
     }
