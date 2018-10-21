@@ -22,7 +22,7 @@ public class PushObjectController {
     @Autowired
     private MongoClient mongoClient;
 
-    @RequestMapping(value="createObject", consumes = "application/json")
+    @RequestMapping(value="/createObject", consumes = "application/json")
 
     public ResponseEntity createCollection(@RequestBody ObjectDataWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-objects");

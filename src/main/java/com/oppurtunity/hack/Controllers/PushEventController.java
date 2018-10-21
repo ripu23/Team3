@@ -1,8 +1,10 @@
 package com.oppurtunity.hack.Controllers;
 
 import com.mongodb.*;
+import com.oppurtunity.hack.entities.DataWrapper;
 import com.oppurtunity.hack.entities.EventWrapper;
 import com.oppurtunity.hack.entities.Module;
+import com.oppurtunity.hack.entities.ObjectDataModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +23,25 @@ public class PushEventController {
     private MongoClient mongoClient;
 
     @RequestMapping(value="createEvent", consumes = "application/json")
-    public ResponseEntity createCollection(@RequestBody EventWrapper objects) {
+    public ResponseEntity createCollection(@RequestBody DataWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-events");
-        DBCollection collection = database.getCollection(objects.getModuleName());
-        BasicDBObject document = new BasicDBObject();
-        document.put("object", objects.getObjectName());
-        for(Module mod : objects.getAttributes()) {
-            document.put(mod.getId(), mod.getLabel());
+        DBCollection eventCollection = database.getCollection(objects.getEventDataWrapper().getModuleName());
+        DBCollection objectCollection = database.getCollection(objects.getObjectDataWrapper().getModuleName());
+
+        //event mapping
+        BasicDBObject document1 = new BasicDBObject();
+        document1.put("object", objects.getObjectDataWrapper().getModuleName());
+        for(ObjectDataModule mod : objects.getEventDataWrapper().getAttributes()) {
+            document1.put(mod.getLabel(), mod.getValue());
         }
-        collection.insert(document);
+        eventCollection.insert(document1);
+
+        // object mapping
+        BasicDBObject document2 = new BasicDBObject();
+        for(ObjectDataModule mod : objects.getObjectDataWrapper().getAttributes()) {
+            document2.put(mod.getLabel(), mod.getValue());
+        }
+        objectCollection.insert(document2);
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
