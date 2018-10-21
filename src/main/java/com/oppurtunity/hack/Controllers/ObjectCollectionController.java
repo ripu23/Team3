@@ -15,7 +15,6 @@ public class ObjectCollectionController {
 
     @RequestMapping(value="/create_object", consumes = "application/json")
     public String createCollection(@RequestBody ModuleWrapper objects) {
-        System.out.println("donation");
         DB database = mongoClient.getDB("progresstracking");
         DBCollection collection = database.getCollection("collections");
         BasicDBObject document = new BasicDBObject();
@@ -28,7 +27,7 @@ public class ObjectCollectionController {
     }
 
     @RequestMapping("/get_all_objects")
-    public List<DBObject> getCollection() {
+    public List<DBObject> getCollections() {
         DB database = mongoClient.getDB("progresstracking");
         DBCollection collection = database.getCollection("collections");
         DBCursor cursor = collection.find();
@@ -37,6 +36,27 @@ public class ObjectCollectionController {
             objects.add(cursor.next());
         }
         return objects;
+    }
+
+    @RequestMapping(value="/get_object", method=RequestMethod.GET)
+    public DBObject getCollection(@RequestParam("collectionName") String collectionName) {
+        DB database = mongoClient.getDB("progresstracking");
+        DBCollection collection = database.getCollection("collections");
+        BasicDBObject whereQuery = new BasicDBObject();
+        whereQuery.put("name", collectionName);
+        DBCursor cursor = collection.find(whereQuery);
+        List<DBObject> objects = new ArrayList<>();
+        while(cursor.hasNext()) {
+            objects.add(cursor.next());
+        }
+        return objects.get(0);
+    }
+
+    @RequestMapping("/delete_objects")
+    public void deleteCollections() {
+        DB database = mongoClient.getDB("progresstracking");
+        DBCollection collection = database.getCollection("collections");
+        collection.drop();
     }
 
 }
