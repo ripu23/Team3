@@ -48,7 +48,7 @@ public class PushEventController {
         Set<String> set = collection.findOne().keySet();
         Set<String> output = new HashSet<>();
         for(String s: set) {
-            if(!s.equals("_id")) {
+            if(!s.equals("_id") && !s.equals("object")) {
                 output.add(s);
             }
         }
