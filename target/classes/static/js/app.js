@@ -10,7 +10,7 @@ homeApp.config(['$routeProvider', function($routeProvider){
 		templateUrl: 'templates/CreateModule.html',
     resolve: {
       availableObjects : ['ObjectService', function(ObjectService){
-        // return ObjectService.getAllObjects();
+        return ObjectService.getAllObjects();
       }]
     },
 		controller : 'CreateModuleController'
