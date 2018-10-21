@@ -25,10 +25,10 @@ public class PushEventController {
     @RequestMapping(value="createEvent", consumes = "application/json")
     public ResponseEntity createCollection(@RequestBody EventWrapper objects) {
         DB database = mongoClient.getDB("progresstracking-events");
-        DBCollection collection = database.getCollection(objects.getEventName());
+        DBCollection collection = database.getCollection(objects.getModuleName());
         BasicDBObject document = new BasicDBObject();
         document.put("object", objects.getObjectName());
-        for(Module mod : objects.getEventmodules()) {
+        for(Module mod : objects.getAttributes()) {
             document.put(mod.getId(), mod.getLabel());
         }
         collection.insert(document);
