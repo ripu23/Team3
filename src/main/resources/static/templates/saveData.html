@@ -9,11 +9,11 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Select Object</span>
         </div>
-        <select class="select-custom" ng-change="populateForm(this)" ng-options="v for v in availableObjects">
+        <select class="select-custom" ng-model="selected" ng-change="populateForm()" ng-options="v for v in availableObjects">
           <option value="">-- choose an option --</option>
         </select>
       </div>
-      <form>
+      <form ng-if="populateObj">
         <div class="form-group row" ng-repeat="obj in populateObj">
           <label>{{obj.label}}</label>
           <input type="text" class="form-control" name="email" ng-model="user.email" required>
