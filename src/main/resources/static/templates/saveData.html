@@ -16,14 +16,14 @@
         <div class="form-group row" ng-repeat="obj in populateObj">
           <label class="col-sm-2 col-form-label">{{obj}}</label>
           <div class="col-sm-5">
-            <input type="text" class="form-control" ng-model="user.email">
+            <input type="text" class="form-control" ng-model="field_$index" ng-change="updateObject(obj, field_$index)">
           </div>
         </div>
       </form>
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-info pull-right" ng-click="saveData()"><input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" />Save</button>
-      <button type="button" class="btn btn-info pull-warning" ng-click="uploadCsv()">Upload CSV</button>
+      <button type="button" class="btn btn-info pull-right" ng-click="save()">Save</button>
+      <button type="button" class="btn btn-info pull-warning" ng-click="uploadCsv()"><input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" /></button>
     </div>
   </div>
 

@@ -20,18 +20,34 @@
           <option value="">-- choose an option --</option>
         </select>
       </div>
-      <form ng-if="populateObj">
-        <div class="form-group row" ng-repeat="obj in populateObj">
-          <label class="col-sm-2 col-form-label">{{obj}}</label>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" name="email" ng-model="user.email">
-          </div>
+      <div ng-if="eventSelected">
+        <div>
+          <h5 class="text-muted">Create Object for {{objectSelected}}</h5>
+          <form>
+            <div class="form-group row" ng-repeat="obj in populateObj">
+              <label class="col-sm-2 col-form-label">{{obj}}</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" ng-model="obj_$index" ng-change="updateObject(obj, obj_$index)">
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+        <div>
+          <h5 class="text-muted">Create Event for {{eventSelected}}</h5>
+          <form>
+            <div class="form-group row" ng-repeat="obj1 in populateEvent">
+              <label class="col-sm-2 col-form-label">{{obj1}}</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" ng-model="evt_$index" ng-change="updateEvent(obj1, evt_$index)">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="card-footer">
-      <button type="button" class="btn btn-info pull-right" ng-click="saveData()"><input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" />Save</button>
-      <button type="button" class="btn btn-info pull-warning" ng-click="uploadCsv()">Upload CSV</button>
+      <button type="button" class="btn btn-info pull-right" ng-click="saveData()">Save</button>
+      <button type="button" class="btn btn-info pull-warning" ng-click="uploadCsv()"><input type="file" ID="fileSelect" accept=".xlsx, .xls, .csv" /></button>
     </div>
   </div>
 
