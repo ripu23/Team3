@@ -12,12 +12,11 @@ app.controller("SaveDataController",[
   }
   $scope.populateObj;
   $scope.populateForm = function(data){
-    console.log(data);
     ObjectService.getObjectDetails(data).then(function(response){
-      console.log(response);
       $scope.populateObj = response.data.attributes;
     }, function(err){
       if(err) throw err;
+      alertify.error("Population failed");
     })
   }
 
