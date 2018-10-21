@@ -6,7 +6,7 @@ app.service("EventCrudService", function($http) {
       method: 'POST',
       url: '/createEvent/',
       data: {
-        eventName: data.moduleName,
+        moduleName: data.moduleName,
         attributes: data.attributes,
         objectName: data.objectName
       }
