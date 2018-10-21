@@ -5,7 +5,8 @@ app.controller("SaveEventController",[
   'availableObjects',
   'ObjectService',
   'EventService',
-  function($scope, availableObjects, ObjectService, EventService){
+  'Upload',
+  function($scope, availableObjects, ObjectService, EventService, Upload){
   console.log("Reached SaveEventController");
   $scope.availableObjects;
   if(availableObjects){
