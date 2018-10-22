@@ -10,3 +10,8 @@ Database - `MongoDB`. <br/>
 Reports - `D3.js`. <br/>
 
 More information can be found [here](https://devpost.com/software/progress_tracking_team3).
+
+Here are some the images:<br/>
+![alt text](https://github.com/ripu23/Team3/blob/master/home.png) <br/>
+![alt text](https://github.com/ripu23/Team3/blob/master/graph.png) <br/>
+      
